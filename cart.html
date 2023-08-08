@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>Cart</title>
+
+  <!-- Bootstrap CSS Link -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+    body {
+
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+      background-color: #ffefd5;
+
+      padding: 20px;
+
+    }
+
+    h1 {
+
+      color:#ff7f50;
+
+      text-align: center;
+
+      margin-bottom: 20px;
+
+      font-size: 36px;
+
+      font-weight: bold;
+
+    }
+
+    table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-top: 50px;
+
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      background-color: #fff;
+
+    }
+
+    th, td {
+
+      padding: 12px 10px;
+
+      text-align: center;
+
+      font-weight: normal;
+
+    }
+
+    th {
+
+      background-color: #ffccbc;
+
+      color: #ff5722;
+
+      border-bottom: 2px solid #ff8a65;
+
+      font-size: 16px;
+
+    }
+
+    td {
+
+      color: #555;
+
+    }
+
+    tr:nth-child(even) {
+
+      background-color: #ffe0b2;
+
+    }
+
+    tr:hover {
+
+      background-color: #ffd39b;
+
+    }
+
+    .negative-amount {
+
+      color: red;
+
+      font-weight: bold;
+
+    }
+
+    .btn-group {
+
+      display: flex;
+
+      justify-content: center;
+
+    }
+
+    .btn {
+
+      margin: 0 5px;
+
+      padding: 5px 10px;
+
+      background-color: #ffab91;
+
+      color: #fff;
+
+      border: none;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+      transition: background-color 0.3s ease-in-out;
+
+    }
+
+    .btn:hover {
+
+      background-color: #ff8a65;
+
+    }
+    .boxforbutton{
+        position: relative;
+        background-color: #ff8a65;;
+        bottom: calc(-54%);
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        height: 35px;
+
+}
+h3{
+  margin-top: -10px;
+}
+
+ 
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <h1>CART</h1>
+
+  </header>
+
+  <section>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Quantity</th>
+
+          <th>Activity</th>
+
+          <th>Date added</th>
+
+          <th>Amount</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>
+
+            <div class="btn-group">
+
+              <button class="btn btn-subtract">-</button>
+
+              <span class="quantity-value">0</span>
+
+              <button class="btn btn-add">+</button>
+
+            </div>
+
+          </td>
+
+          <td>Hokkaido Fun Package</td>
+
+          <td>2022-10-15</td>
+
+          <td class="amount">$3500</td>
+
+          <td>
+
+            <div class="btn-group">
+
+              <button class="btn btn-delete">Delete</button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>
+
+            <div class="btn-group">
+
+              <button class="btn btn-subtract">-</button>
+
+              <span class="quantity-value">0</span>
+
+              <button class="btn btn-add">+</button>
+
+            </div>
+
+          </td>
+
+          <td>Annual Multiple Trip Plan</td>
+
+          <td>2022-10-16</td>
+
+          <td class="amount">$6000</td>
+
+          <td>
+
+            <div class="btn-group">
+
+              <button class="btn btn-delete">Delete</button>
+
+            </div>  
+
+          <td>
+
+            <form action = "success.html">
+
+<div class = "boxforbutton">
+                <h3 class= "start" onclick = "redirectCheckout()" >CheckOut</h3>
+              </div>
+
+            </form>
+
+          </td>
+
+           
+
+        </tr>
+
+        <!-- Add more transaction rows as needed -->
+
+       
+
+        <!-- Total row -->
+
+        <tr>
+
+          <td colspan="3"></td>
+
+          <td class="total-amount">$9500.00</td>
+
+          <td></td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <script>
+
+    const rows = [document.querySelectorAll('tbody tr')];
+
+ 
+
+    rows.forEach((row) => {
+
+      const quantityValue = row.querySelector('.quantity-value');
+
+      const addButton = row.querySelector('.btn-add');
+
+      const subtractButton = row.querySelector('.btn-subtract');
+
+      const deleteButton = row.querySelector('.btn-delete');
+
+      const checkOutButton = row.querySelector('.btn-checkOut');
+
+     
+
+    });
+
+      addButton.addEventListener('click', () => {
+
+        let currentQuantity = parseInt(quantityValue.innerText);
+
+        currentQuantity += 1;
+
+        quantityValue.innerText = currentQuantity;
+
+        updateAmount(row);
+
+ 
+
+        updateTotalAmount();
+
+      });
+
+ 
+
+      subtractButton.addEventListener('click', () => {
+
+        let currentQuantity = parseInt(quantityValue.innerText);
+
+        if (currentQuantity > 1) {
+
+          currentQuantity -= 1;
+
+          quantityValue.innerText = currentQuantity;
+
+          updateAmount(row);
+
+          updateTotalAmount();
+
+        }
+
+      });
+
+ 
+
+      deleteButton.addEventListener('click', () => {
+
+        row.remove();
+
+        updateTotalAmount();
+
+      });
+
+      const checkoutButton = row.querySelector('.btn-checkOut'); // Add the missing variable declaration
+
+checkoutButton.addEventListener('click', () => {
+
+    alert("Payment Successful");
+
+});
+
+ 
+
+    function updateAmount(row) {
+
+      const quantityValue = row.querySelector('.quantity-value');
+
+      const amountCell = row.querySelector('.amount');
+
+      const amount = parseFloat(amountCell.innerText.slice(1));
+
+      const quantity = parseInt(quantityValue.innerText);
+
+      const newAmount = amount * quantity;
+
+      amountCell.innerText = `${newAmount.toFixed(2)}`; // Add the missing quotes
+
+ 
+
+    }
+
+ 
+
+    function updateTotalAmount() {
+
+      const amountCells = document.querySelectorAll('.amount');
+
+      let totalAmount = 0;
+
+ 
+
+      amountCells.forEach((amountCell) => {
+
+        const amount = parseFloat(amountCell.innerText.slice(1));
+
+        totalAmount += amount;
+
+      });
+
+ 
+
+      const totalAmountCell = document.querySelector('.total-amount');
+
+      totalAmountCell.innerText = `${totalAmount.toFixed(2)}`;
+
+ 
+
+    }
+
+ 
+
+   
+
+    function redirectCheckout() {
+      window.location.href = "PS22.html";
+    }
+
+  </script>
+
+</body>
+
+</html>
